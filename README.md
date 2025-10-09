@@ -64,9 +64,17 @@ Customer curn data/
 
 ## 🌐 Web Application
 
+### 🚀 Live Demo
+**[Try the live app on Streamlit Cloud!](https://customer-churn-prediction-jagjeetjenagit.streamlit.app)**
+
+### Local Setup
 Run the Streamlit app locally:
 
 ```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the app
 streamlit run churn_app.py
 ```
 
