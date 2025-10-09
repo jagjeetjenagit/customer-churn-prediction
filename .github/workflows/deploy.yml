@@ -1,0 +1,41 @@
+name: Deploy Streamlit App
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Test Streamlit app
+      run: |
+        python -c "import streamlit; print('Streamlit installed successfully')"
+        python -c "import pandas, numpy, sklearn, xgboost, joblib; print('All dependencies installed')"
+        
+    - name: Validate app structure
+      run: |
+        ls -la
+        ls -la models/
+        python -c "
+        import os
+        assert os.path.exists('churn_app.py'), 'churn_app.py not found'
+        assert os.path.exists('models/best_churn_model.pkl'), 'Model file not found'
+        assert os.path.exists('models/preprocessor.pkl'), 'Preprocessor not found'
+        print('✅ All required files present')
+        "

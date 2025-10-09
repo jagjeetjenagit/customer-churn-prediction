@@ -64,6 +64,12 @@ Customer curn data/
 
 ## 🌐 Web Application
 
+### 🚀 One-Click Deployment
+
+[![Deploy to Streamlit Cloud](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/new?repository=jagjeetjenagit/customer-churn-prediction&branch=main&mainModule=churn_app.py)
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/jagjeetjenagit/customer-churn-prediction?quickstart=1)
+
 ### 🚀 Live Demo
 **[Try the live app on Streamlit Cloud!](https://customer-churn-prediction-jagjeetjenagit.streamlit.app)**
 
