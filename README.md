@@ -47,11 +47,13 @@ This project demonstrates a complete machine learning pipeline for binary classi
 ```
 Customer curn data/
 ├── customer_churn_prediction.ipynb  # Main analysis notebook
-├── churn_app.py                     # Streamlit web application
+├── churn_app.py                     # Streamlit prediction app
+├── dashboard.py                     # Analysis dashboard (NEW!)
 ├── models/                          # Saved model artifacts
 │   ├── preprocessor.pkl
 │   ├── best_churn_model.pkl
 │   └── model_info.pkl
+├── requirements.txt
 └── README.md
 ```
 
@@ -73,15 +75,32 @@ Customer curn data/
 ### 🚀 Live Demo
 **[Try the live app on Streamlit Cloud!](https://customer-churn-prediction-jagjeetjenagit.streamlit.app)**
 
+### 📊 Two Applications Available
+
+1. **Churn Prediction App** (`churn_app.py`)
+   - Interactive customer churn prediction
+   - 18 input features for accurate predictions
+   - Real-time probability scores
+
+2. **Analysis Dashboard** (`dashboard.py`) - **NEW!** 📈
+   - Comprehensive data insights and visualizations
+   - Model performance metrics and comparisons
+   - Feature importance analysis
+   - Business impact calculator and ROI projections
+   - Customer segmentation and priority matrix
+
 ### Local Setup
-Run the Streamlit app locally:
+Run the Streamlit apps locally:
 
 ```bash
 # Install dependencies
 pip install -r requirements.txt
 
-# Run the app
+# Run the prediction app
 streamlit run churn_app.py
+
+# Or run the analysis dashboard
+streamlit run dashboard.py
 ```
 
 The app provides:

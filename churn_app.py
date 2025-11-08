@@ -8,6 +8,9 @@ import numpy as np
 # To run: pip install streamlit && streamlit run churn_app.py
 
 st.title("🔮 Customer Churn Prediction")
+
+# Add navigation to dashboard
+st.info("💡 **New!** Check out the [Analysis Dashboard](dashboard.py) for comprehensive insights and visualizations!")
 st.write("**Demo App** - Predict if a customer will churn")
 
 # Load saved artifacts
