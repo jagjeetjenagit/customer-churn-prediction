@@ -387,15 +387,22 @@ elif page == "🎯 Business Metrics":
                  delta=f"{roi:.0f}% ROI",
                  help=f"Revenue saved (${revenue_saved:,.0f}) - Retention cost (${retention_investment:,.0f})")
     
-    # Explain the calculation
-    st.info(f"""
-    **📊 How the ROI is calculated:**
-    - Investment: ${retention_investment:,.0f} (${retention_cost_per_customer} × {customers_saved:,} customers)
-    - Return: ${revenue_saved:,.0f} (${avg_monthly_revenue}/mo × {customer_lifetime_months} months × {customers_saved:,} customers)
-    - Net Profit: ${net_benefit:,.0f}
-    - **ROI = (Net Profit ÷ Investment) × 100 = {roi:.0f}%**
+    # Explain the calculation - NOW DYNAMIC!
+    st.success(f"""
+    **📊 How the ROI is calculated (updates as you change sliders):**
     
-    This means for every $1 spent on retention, you get ${roi/100:.1f} back!
+    💰 **Investment**: ${retention_investment:,.0f}  
+    (${retention_cost_per_customer} per customer × {customers_saved:,} customers saved)
+    
+    💵 **Return**: ${revenue_saved:,.0f}  
+    (${avg_monthly_revenue}/month × {customer_lifetime_months} months × {customers_saved:,} customers)
+    
+    ✅ **Net Profit**: ${net_benefit:,.0f}  
+    (Revenue - Investment)
+    
+    🎯 **ROI = (${net_benefit:,.0f} ÷ ${retention_investment:,.0f}) × 100 = {roi:.1f}%**
+    
+    💡 **What this means**: For every $1 you spend on keeping customers, you earn back **${roi/100:.2f}**!
     """)
     
     st.markdown("---")
