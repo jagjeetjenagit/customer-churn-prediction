@@ -340,22 +340,32 @@ elif page == "🎯 Business Metrics":
     
     # ROI Calculator
     st.subheader("💰 Churn Reduction ROI Calculator")
+    st.write("**What does this do?** Calculate the financial return on investment for reducing customer churn.")
+    st.write("Adjust the sliders and numbers below to see how much money you can save!")
     
     col1, col2 = st.columns(2)
     
     with col1:
-        st.markdown("#### Input Parameters")
-        total_customers = st.number_input("Total Customers", value=7043, step=100)
-        current_churn_rate = st.slider("Current Churn Rate (%)", 0, 100, 27) / 100
-        avg_monthly_revenue = st.number_input("Avg Monthly Revenue ($)", value=65, step=5)
-        customer_lifetime_months = st.number_input("Avg Customer Lifetime (months)", value=32, step=1)
-        retention_cost_per_customer = st.number_input("Retention Cost per Customer ($)", value=50, step=10)
+        st.write("#### Input Parameters")
+        st.caption("Change these values to match your business:")
+        total_customers = st.number_input("Total Customers", value=7043, step=100, 
+                                         help="How many customers do you have?")
+        current_churn_rate = st.slider("Current Churn Rate (%)", 0, 100, 27,
+                                       help="What % of customers leave each year?") / 100
+        avg_monthly_revenue = st.number_input("Avg Monthly Revenue ($)", value=65, step=5,
+                                             help="Average $ per customer per month")
+        customer_lifetime_months = st.number_input("Avg Customer Lifetime (months)", value=32, step=1,
+                                                   help="How long does a typical customer stay?")
+        retention_cost_per_customer = st.number_input("Retention Cost per Customer ($)", value=50, step=10,
+                                                      help="Cost to keep one customer from leaving")
     
     with col2:
-        st.markdown("#### Projected Outcomes")
-        target_churn_reduction = st.slider("Target Churn Reduction (%)", 0, 50, 10)
+        st.write("#### Projected Outcomes")
+        st.caption("🎯 Move the slider to see how reducing churn affects your business:")
+        target_churn_reduction = st.slider("Target Churn Reduction (%)", 0, 50, 10,
+                                           help="By what % do you want to reduce churn?")
         
-        # Calculations
+        # Calculations with explanations
         current_churned = int(total_customers * current_churn_rate)
         customers_saved = int(current_churned * (target_churn_reduction / 100))
         revenue_per_customer = avg_monthly_revenue * customer_lifetime_months
@@ -364,9 +374,29 @@ elif page == "🎯 Business Metrics":
         net_benefit = revenue_saved - retention_investment
         roi = (net_benefit / retention_investment * 100) if retention_investment > 0 else 0
         
-        st.metric("👥 Customers Saved", f"{customers_saved:,}")
-        st.metric("💵 Revenue Saved", f"${revenue_saved:,.0f}")
-        st.metric("💰 Net Benefit", f"${net_benefit:,.0f}", delta=f"{roi:.0f}% ROI")
+        st.write("")
+        st.write(f"Currently **{current_churned:,}** customers leave per year")
+        st.write(f"If you reduce churn by **{target_churn_reduction}%**, you save **{customers_saved:,}** customers")
+        st.write("")
+        
+        st.metric("👥 Customers Saved", f"{customers_saved:,}",
+                 help=f"Out of {current_churned:,} churning customers")
+        st.metric("💵 Revenue Saved", f"${revenue_saved:,.0f}",
+                 help=f"= {customers_saved:,} customers × ${revenue_per_customer:,.0f} lifetime value")
+        st.metric("💰 Net Benefit", f"${net_benefit:,.0f}", 
+                 delta=f"{roi:.0f}% ROI",
+                 help=f"Revenue saved (${revenue_saved:,.0f}) - Retention cost (${retention_investment:,.0f})")
+    
+    # Explain the calculation
+    st.info(f"""
+    **📊 How the ROI is calculated:**
+    - Investment: ${retention_investment:,.0f} (${retention_cost_per_customer} × {customers_saved:,} customers)
+    - Return: ${revenue_saved:,.0f} (${avg_monthly_revenue}/mo × {customer_lifetime_months} months × {customers_saved:,} customers)
+    - Net Profit: ${net_benefit:,.0f}
+    - **ROI = (Net Profit ÷ Investment) × 100 = {roi:.0f}%**
+    
+    This means for every $1 spent on retention, you get ${roi/100:.1f} back!
+    """)
     
     st.markdown("---")
     
